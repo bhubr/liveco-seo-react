@@ -1,5 +1,7 @@
 import React from 'react';
-import BlogPost from './components/BlogPost';
+import { Switch, Route } from 'react-router-dom';
+import BlogPostList from './components/BlogPostList';
+import BlogPostDetails from './components/BlogPostDetails';
 import './App.css';
 import db from './db.json';
 
@@ -10,9 +12,14 @@ function App() {
         <h1>Welcome to my development blog</h1>
       </header>
 
-      {db.posts.map((post) => (
-        <BlogPost key={post.id} title={post.title} content={post.content} />
-      ))}
+      <Switch>
+        <Route exact path="/">
+          <BlogPostList posts={db.posts} />
+        </Route>
+        <Route path="/:slug">
+          <BlogPostDetails />
+        </Route>
+      </Switch>
     </div>
   );
 }
