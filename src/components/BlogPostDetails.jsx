@@ -8,6 +8,14 @@ function BlogPostDetails() {
   const { slug } = useParams();
   // récupérer le bon post dans le tableau
   const post = db.posts.find((p) => p.slug === slug);
+  if (!post) {
+    return (
+      <div>
+        <h2>Ooops! 404 Error!</h2>
+        <p>Article Not Found</p>
+      </div>
+    );
+  }
   return (
     <article className="BlogPostDetails">
       <Helmet>
